@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Newgreen Glossary</title>
+  <style type="text/css">
+    /* CSS begin */
+    * {box-sizing: border-box;}
+    body {font-family: "Lato", sans-serif;}
+    
+    /* Affects bar that contains tabs */
+    .tab 
+    {
+      float: left;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+      width: 30%;
+      height: 100%;
+    }
+    
+    /* Affects tab display */
+    .tab button 
+    {
+      display: block;
+      background-color: inherit;
+      color: black;
+      padding: 22px 16px;
+      width: 100%;
+      border: none;
+      outline: none;
+      text-align: left;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+    
+    .tab button:hover 
+    {
+      background-color: #ddd;
+    }
+    
+    .tab button.active 
+    {
+      background-color: #ccc;
+    }
+    
+    /* Affects content display */
+    .termData 
+    {
+      float: left;
+	    position: fixed;
+	    right: 0;
+      padding: 0px 12px;
+      border: 1px solid #ccc;
+      width: 69.9%;
+      height: max-content;
+    }
+    
+    /* This is the flex box container that holds image buttons.*/
+    .button-container 
+    {
+      display: flex;
+      border: 1px solid #ccc;
+      justify-content: center;
+    }
+
+    .button 
+    {
+      margin: 15px;
+    }
+    
+    /* CSS end */
+  </style>
+</head>
+<body>
+  <!-- HTML start -->
+
+  <div class="button-container">
+    <a href="page1.html" class="button">
+      <img src="button1.jpg" alt="Button 1">
+    </a>
+    <a href="page2.html" class="button">
+      <img src="button2.jpg" alt="Button 2">
+    </a>
+    <a href="page3.html" class="button">
+      <img src="button3.jpg" alt="Button 3">
+    </a>
+    <a href="page4.html" class="button">
+      <img src="button4.jpg" alt="Button 4">
+    </a>
+  </div>
+
+  <div class="tab">
+    <button class="tabContent" onclick = "termView(event, 'amortization')" id="defaultOpen">Amortization</button>
+    <button class="tabContent" onclick = "termView(event, 'assets')">Assets</button>
+    <button class="tabContent" onclick = "termView(event, 'assetAllocation')">Asset Allocation</button>
+    <button class="tabContent" onclick = "termView(event, 'balanceSheet')">Balance Sheet</button>
+    <button class="tabContent" onclick = "termView(event, 'capitalGain')">Capital Gain</button>
+    <button class="tabContent" onclick = "termView(event, 'capitalLoss')">Capital Loss</button>
+    <button class="tabContent" onclick = "termView(event, 'capitalMarket')">Capital Market</button>
+    <button class="tabContent" onclick = "termView(event, 'cashFlow')">Cash Flow</button>
+    <button class="tabContent" onclick = "termView(event, 'cashFlowState')">Cash Flow Statement</button>
+    <button class="tabContent" onclick = "termView(event, 'compoundInt')">Compound Interest</button>
+    <button class="tabContent" onclick = "termView(event, 'depreciation')">Depreciation</button>
+    <button class="tabContent" onclick = "termView(event, 'ebitda')">EBITDA</button>
+    <button class="tabContent" onclick = "termView(event, 'equity')">Equity</button>
+    <button class="tabContent" onclick = "termView(event, 'incomeStatement')">Income Statement</button>
+    <button class="tabContent" onclick = "termView(event, 'liabilities')">Liabilities</button>
+	  <button class="tabContent" onclick = "termView(event, 'liquity')">Liquity</button>
+	  <button class="tabContent" onclick = "termView(event, 'netWorth')">Net Worth</button>
+	  <button class="tabContent" onclick = "termView(event, 'profitMargin')">Profit Margin</button>
+    <button class="tabContent" onclick = "termView(event, 'roI')">Return on Investment</button>
+    <button class="tabContent" onclick = "termView(event, 'valuation')">Valuation</button>
+    <button class="tabContent" onclick = "termView(event, 'workingCapital')">Working Capital</button>
+  </div>
+
+  <div id="amortization" class="termData">
+    <h3>Amortization</h3>
+    <p>Spreading an intangible asset's value throughout it's course. Intangible can be applied to copyright, trademarks, or patents.</p>
+  </div>
+  <div id="assets" class="termData">
+    <h3>Assets</h3>
+    <p>
+      Items you can use to further give you value. There are many different type of assets such as: <br/>
+      Tangible Assets, which represent physical items like stocks, land, machinery, anything that is physically present. <br/>
+      Intangible Assets, which represent nonphysical terms like copyright, trademarks, brands. <br/>
+      Current Assets, which are assets that can be exchanged for cash within a certain amount of time. <br/>
+      Fixed Assets, can't be exchanged for cash, but they are physical items that are owned and used to generate cash.
+    </p> 
+  </div>
+  <div id="assetAllocation" class="termData">
+    <h3>Asset Allocation</h3>
+    <p>A technique where you spread cash across many investment and their classes, such as bonds, stocks, or outright money.</p>
+  </div>
+  <div id="balanceSheet" class="termData">
+    <h3>Balance Sheet</h3>
+    <p>
+      An equation statement where it shows the financial worth of a company. <br/>
+      The equation is: <br/>
+      Assets (Cash) = Liabilities + Equity
+    </p>
+  </div>
+  <div id="capitalGain" class="termData">
+    <h3>Capital Gain</h3>
+    <p>The increase in value an asset has that's larger than the price that was initially paid for.</p>
+  </div>
+  <div id="capitalLoss" class="termData">
+    <h3>Capital Loss</h3>
+    <p>The decrease in value an asset has that's larger than the price that was initially paid for.</p>
+  </div>
+  <div id="capitalMarket" class="termData">
+    <h3>Capital Market</h3>
+    <p>
+      A place where investors participate trading with assets. <br/>
+      There are a lot of participants in the market, including: <br/>
+      Companies, who sell borrowed funds and stocks. <br/>
+      Mutual funds, where an investor handles the investments of many individuals.<br/>
+      Hedge funds, an investor that hedges, lowering risk by buying a stock and lowering the value of a similar stock.
+    </p>
+  </div>
+  <div id="cashFlow" class="termData">
+    <h3>Cash Flow</h3>
+    <p>The transactions of cash moving in and out of a company, either from business operations, investments, or billing/finances.</p>
+  </div>
+  <div id="cashFlowState" class="termData">
+    <h3>Cash Flow Statement</h3>
+    <p>The statement of the company's cash transactions in a point in time, recording the spending and gaining of cash.</p>
+  </div>
+  <div id="compoundInt" class="termData">
+    <h3>Compound Interest</h3>
+    <p>The gaining of money that is gained when depositing and keeping the money deposited over time.</p>
+  </div>
+  <div id="depreciation" class="termData">
+    <h3>Depreciation</h3>
+    <p>The decrease of a asset's value due to either not being used often or the overuse of it.</p>
+  </div>
+  <div id="ebitda" class="termData">
+    <h3>EBITDA</h3>
+    <p>
+      An acronym that means "Earnings Before Interest, Taxes, Depreciation, and Amortization".<br/>
+      It is commonly used to estimate a company's cash flow.
+    </p>
+  </div>
+  <div id="equity" class="termData">
+    <h3>Equity</h3>
+    <p>The value that belongs to owners after all liabilities and assets are accounted for.</p>
+  </div>
+  <div id="incomeStatement" class="termData">
+    <h3>Income Statement</h3>
+    <p>Dispalys the incomes and expenses of the business during a period of time.</p>
+  </div>
+  <div id="liabilities" class="termData">
+    <h3>Liabilities</h3>
+    <p>
+      An amount of money or assets that you owe others for, which can come in different forms: <br/>
+      Current Liabilities: Expenses that are due soon. <br/>
+      Long-term Liabilities: Expenses that are paid for over a period of time.
+    </p>
+  </div>
+  <div id="liquity" class="termData">
+    <h3>Liquity</h3>
+    <p>How quickly an asset can be sold for cash.</p>
+  </div>
+  <div id="netWorth" class="termData">
+    <h3>Net Worth</h3>
+    <p>Overall state of financial health, by subtracting your asset value by what you owe.</p>
+  </div>
+  <div id="profitMargin" class="termData">
+    <h3>Profit Margin</h3>
+    <p>
+      Profitability from the income divided by the revenue generated or sales. This can be broken down into two types:<br/>
+      Gross Profit Margin: Profitability coming from a product or series of products. <br/>
+      Net Profit Margin: Value/profitability of the entire company.
+    </p>
+  </div>
+  <div id="roI" class="termData">
+    <h3>Return on Investment</h3>
+    <p>
+      The expected value of a project/activity when compared to the cost of investment, usually represented by a percentage.<br/>
+      To get the percentage, the equation is: <br/>
+      Return on Investment = [(Income - Cost) / Cost ] * 100
+    </p>
+  </div>
+  <div id="valuation" class="termData">
+    <h3>Valuation</h3>
+    <p>Evaluating the present worth of an asset and/or company. This is used to decide whether to sell or merge companies or get outside investments.</p>
+  </div>
+  <div id="workingCapital" class="termData">
+    <h3>Working Capital</h3>
+    <p>The difference coming from a company's present assets and liabilities.</p>
+  </div>
+
+  <!-- HTML end -->
+  <script type="text/javascript">
+    // Javascript start
+    function termView(switchTab, termName) 
+    {
+      var i, termData, tabContent;
+      termData = document.getElementsByClassName("termData");
+      for (i = 0; i < termData.length; i++) 
+      {
+        termData[i].style.display = "none";
+      }
+      tabContent = document.getElementsByClassName("tabContent");
+      for (i = 0; i < tabContent.length; i++) 
+      {
+        tabContent[i].className = tabContent[i].className.replace(" active", "");
+      }
+      document.getElementById(termName).style.display = "block";
+      switchTab.currentTarget.className += " active";
+    }
+
+    // Opens tab that has "defaultOpen" next to it.
+    document.getElementById("defaultOpen").click();
+    // Javascript end
+  </script>
+   
+</body>
+</html>
