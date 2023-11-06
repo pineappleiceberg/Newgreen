@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
+
 Base = declarative_base()
 
 class BudgetEntry(Base):
@@ -19,3 +20,4 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String)
     authtoken = Column(String)
+    hashed_password = Column(String)
