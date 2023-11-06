@@ -8,16 +8,16 @@ Base = declarative_base()
 
 class BudgetEntry(Base):
     __tablename__ = 'budget'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String)
     note = Column(String)
     amount = Column(Float)
     pastBudget = Column(Boolean)
-    user_id = Column(ForeignKey())
+    user_id = Column(ForeignKey("user.id"))
 
 class User(Base):
     __tablename__ = 'user'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     username = Column(String)
     authtoken = Column(String)
     hashed_password = Column(String)
