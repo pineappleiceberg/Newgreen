@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newgreen Calculator</title>
+    <style>
+        body 
+		{
+			font-family: "Lato", sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+		
+		.button-container 
+		{
+			display: flex;
+			border: 1px solid #ccc;
+			justify-content: center;
+		}
+
+		.button 
+		{
+			margin: 15px;
+		}
+		
+		.calc 
+		{
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 20px;
+			text-align: center;
+			text-decoration: none;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 12px;
+		}
+
+        main {
+            flex: 1;
+            display: flex;
+        }
+
+        .left-section, .right-section {
+            flex: 1;
+            padding: 20px;
+			margin: auto;
+        }
+		
+		.center-left
+		{
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 25%;
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+		
+		.center-right
+		{
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 75%;
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+		
+		table 
+		{
+			border-collapse: collapse;
+		}
+		
+		td, th 
+		{
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+    </style>
+	<script type="text/javascript">
+		function investment_calc() 
+		{
+			var init_amt = parseInt(prompt("Starting Amount: "));
+			var time = parseInt(prompt("Time in years: "));
+			var interest_rate = parseInt(prompt("Interest Rate Percentage: "));
+			var Compound = prompt("Compounded Annually or Monthly? Enter Annual or Month: ");
+			var add_cont = parseInt(prompt("Add any additional contribution amount: "));
+			var interest_amt = 0;
+			var temp = init_amt;
+			if (Compound === "Annual" || Compound === "annual") 
+			{
+				for (var i = 0; i < time; i++) 
+				{
+					temp += add_cont;
+					interest_amt = temp * (interest_rate / 100);
+					temp += interest_amt;
+				}
+				document.getElementById("return").innerHTML = "Investment value at end of year " + (i) + " is $" + temp.toFixed(2);
+			} 
+			else if (Compound === "Month" || Compound === "month") 
+			{
+				time = time * 12;
+				for (var i = 0; i < time; i++) 
+				{
+					temp += add_cont;
+					interest_amt = temp * ((interest_rate / 100) / 12);
+					temp += interest_amt;
+				}
+				document.getElementById("return").innerHTML = "Investment value at end of month " + (i) + " is $" + temp.toFixed(2);
+			}
+		}
+	</script>
+</head>
+<body>
+<img src="Design_Assets/logo.png" alt="Newgreen Logo" style="width:75px;height:75px;">
+<div class="button-container">
+    <a href="page1.html" class="button">
+      <img src="Design_Assets/NewGreen_Button_Calendar.png" alt="Newgreen Calendar">
+    </a>
+    <a href="page2.html" class="button">
+      <img src="Design_Assets/NewGreen_Button_Calculator.png" alt="Newgreen Calculator">
+    </a>
+    <a href="Glossary.html" class="button">
+      <img src="Design_Assets/NewGreen_Button_Glossary.png" alt="Newgreen Glossary">
+    </a>
+    <a href="page4.html" class="button">
+      <img src="Design_Assets/NewGreen_Button_About.png" alt="Newgreen About">
+    </a>
+</div>
+    <main>
+        <div class="left-section">
+			<div class="center-left">
+				<button class="calc" onclick="investment_calc()">Investment Calculator</button>
+				<p id="return"></p>
+				
+			</div>
+        </div>
+        <div class="right-section">
+			<div class="center-right">
+			<p>Below, here is a list of other equations you can do while calculating for something else.</p>
+            <table>
+				<tr>
+					<th>Purpose</th>
+					<th>Equation</th>
+				</tr>
+				<tr>
+					<td>Balance Sheet</td>
+					<td>Assets (Cash) = Liabilities + Equity</td>
+				</tr>
+				<tr>
+					<td>RoI</td>
+					<td>Investment Return = [(Income - Cost) / Cost ] * 100</td>
+				</tr>
+				<tr>
+					<td>Profit Margin</td>
+					<td>Profit Margin = (Income / Revenue ) * 100</td>
+				</tr>
+				<tr>
+					<td>Outstanding Sale</td>
+					<td>Payment = (Receivable Accounts / Sales ) * # of Days</td>
+				</tr>
+				<tr>
+					<td>Break-even Point</td>
+					<td>Break-even Point = Costs / Contribution Margin</td>
+				</tr>
+			<table>
+			</div>
+        </div>
+		
+    </main>
+</body>
+</html>
