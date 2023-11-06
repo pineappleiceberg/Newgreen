@@ -25,14 +25,16 @@ def create_user(db: Session, user: schemas.UserCreate):
     return db_user
 
 
-def get_home_works(db: Session, skip: int = 0, limit: int = 1000):
+def get_budget_items(db: Session, skip: int = 0, limit: int = 1000):
     return db.query(models.BudgetEntry).offset(skip).limit(limit).all()
 
 
-def create_user_home_work(db: Session, budget_items: schemas.BudgetItem, user_id: int):
+def create_user_budget_item(db: Session, budget_items: schemas.BudgetItem, user_id: int):
     db_budget_items = models.BudgetEntry(**budget_items.dict(), owner_id=user_id)
     db.add(db_budget_items)
     db.commit()
     db.refresh(db_budget_items)
 
     return db_budget_items
+
+
