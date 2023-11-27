@@ -2,43 +2,64 @@
 <html>
 <head>
     <title>Log In</title>
-    <link rel="stylesheet" href="Login_Page.css"
+    <link rel="stylesheet" href="Login_Page.css">
 </head>
-
 <body>
-
     <div class="container" style="text-align:center">
-        <form action="">
-
+        <form id="loginForm">
             <img src="Design_Assets/logoForInTheApp.png" style="height: 100px; padding-top: 25px">
-
             <h1>NewGreen</h1>
-
             <div class="input_box">
-                <input type="text" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Username" required>
             </div>
             <div class="input_box">
-                <input type="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password" required>
             </div>
-
             <button type="submit" class="btn">
                 <img src="NewGreen_Button_Login.png">
-                <style>
-                    img {
-                        height: 30px;
-                        border-radius: 10px;
-                    }
-                    img:hover {
-                        box-shadow: 5px 5px 2px #336600;
-                    }
-                </style>
             </button>
-
+            <style>
+                img {
+                    height: 30px;
+                    border-radius: 10px;
+                }
+                img:hover {
+                    box-shadow: 5px 5px 2px #336600;
+                }
+            </style>
             <div class="register_link">
                 <p>Don't have an account? <a href="Registration_Page.html">Register</a></p>
             </div>
-
-           
-         </form>
-     </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            fetch('http://localhost:8080/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Login failed: No account with those credentials');
+                }
+            })
+            .then(data => {
+                localStorage.setItem('token', data.access_token);
+                window.location.href = 'calculator.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
+        });
+    </script>
 </body>
+</html>

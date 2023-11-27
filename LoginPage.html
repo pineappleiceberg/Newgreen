@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Log In</title>
-	    <link rel="stylesheet" type="text/css" href="Log in page.css"/>
-    </head>
+<head>
+    <title>Log In</title>
+    <link rel="stylesheet" type="text/css" href="Log in page.css"/>
+</head>
 <body>
     <h1>Log In</h1>
-    <label for="Username">Username:</label>
-    <input type="text" id="Username" name="Username" placeholder="enter username here"><br><br>
-    <label for="Password">Password:</label>
-    <input type="text" id="Password" name="Password" placeholder="********">
+    <form id="loginForm">
+        <label for="Username">Username:</label>
+        <input type="text" id="Username" name="Username" placeholder="enter username here"><br><br>
+        <label for="Password">Password:</label>
+        <input type="password" id="Password" name="Password" placeholder="********"><br><br>
+        <button type="submit">Log In</button>
+    </form>
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('Username').value; // Assuming 'Username' is actually the user's email
+        const password = document.getElementById('Password').value;
+        fetch('http://localhost:8080/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Login successful');
+            // Handle successful login
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Login failed');
+            // Handle login failure
+        });
+    });
+</script>
 </body>
-
+</html>

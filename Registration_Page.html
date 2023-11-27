@@ -1,45 +1,65 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Log In</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="Registration_Page.css">
 </head>
-
 <body>
-
     <div class="container" style="text-align:center">
-        <form action="">
-
+        <form id="registrationForm">
             <img src="Design_Assets/logoForInTheApp.png" style="height: 100px; padding-top: 25px">
-
             <h1>Registration</h1>
-
             <div class="input_box">
-                <input type="text" placeholder="Enter Email" required>
+                <input type="text" id="email" placeholder="Enter Email" required>
             </div>
             <div class="input_box">
-                <input type="password" placeholder="Create a Password" required>
+                <input type="password" id="password" placeholder="Create a Password" required>
             </div>
-
             <button type="submit" class="btn">
                 <img src="Design_Assets/NewGreen_Button_CreateAccount.png">
-                <style>
-                    img {
-                        height: 30px;
-                        border-radius: 10px;
-                    }
-                    img:hover {
-                        box-shadow: 5px 5px 2px #336600;
-                    }
-                </style>
             </button>
-
+            <style>
+                img {
+                    height: 30px;
+                    border-radius: 10px;
+                }
+                img:hover {
+                    box-shadow: 5px 5px 2px #336600;
+                }
+            </style>
             <div class="login_link">
                 <p>Already have an account? <a href="Login_Page.html">Login</a></p>
             </div>
-
-           
-         </form>
-     </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            fetch('http://localhost:8080/createuser/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Email already registered');
+                }
+            })
+            .then(data => {
+                alert('Registration successful');
+                window.location.href = 'Login_Page.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
+        });
+    </script>
 </body>
 </html>

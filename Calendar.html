@@ -5,124 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newgreen Calendar</title>
     <style>
-        body 
-	{
-		font-family: "Lato", sans-serif;
-        	margin: 0;
-            	padding: 0;
-            	display: flex;
-            	flex-direction: column;
-            	min-height: 100vh;
-        }
-		
-	.button-container 
-	{
-		display: flex;
-		border: 1px solid #ccc;
-		justify-content: center;
-	}
-
-	.button 
-	{
-		margin: 15px;
-	}
-		
-        main 
-	{
-         	flex: 1;
-            	display: flex;
+        body {
+            font-family: "Lato", sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        .container 
-	{
-            	flex: 1;
-            	padding: 20px;
-		margin: auto;
+        .button-container {
+            display: flex;
+            border: 1px solid #ccc;
+            justify-content: center;
         }
-		
-	.center
-	{
-		margin: 0;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		-ms-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-	}
-		
-	table 
-	{
-		border-collapse: collapse;
-	}
-		
-	td, th 
-	{
-		border: 1px solid #dddddd;
-		text-align: left;
-		padding: 8px;
-	}
-	
-	.addbutton 
-	{
-		background-color: #4CAF50;
-		border: none;
-		color: white;
-		padding: 20px;
-		text-align: center;
-		text-decoration: none;
-		font-size: 16px;
-		cursor: pointer;
-		border-radius: 12px;
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
-	    
+
+        .button {
+            margin: 15px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+            margin: auto;
+        }
+
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .addbutton {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+
+        .add-budget-item-form input,
+        .add-budget-item-form button {
+            margin: 5px;
+        }
+
     </style>
-	<script type="text/javascript">
-	function entry()
-	{
-		var date = prompt("Enter the date in MM-DD-YYYY: "));
-		var reason = prompt("Enter the reason for entry: "));
-		var amount = parseInt(prompt("Enter the transaction or deposit, use a '-' for transactions: "));
-	}
-	</script>
 </head>
 <body>
-<img src="Design_Assets/logo.png" alt="Newgreen Logo" style="width:75px;height:75px;">
-<div class="button-container">
-    <a href="Login_Page.html" class="button">
-      <img src="Design_Assets/NewGreen_Button_Calendar.png" alt="Newgreen Calendar">
-    </a>
-    <a href="Calculator.html" class="button">
-      <img src="Design_Assets/NewGreen_Button_Calculator.png" alt="Newgreen Calculator">
-    </a>
-    <a href="Glossary.html" class="button">
-      <img src="Design_Assets/NewGreen_Button_Glossary.png" alt="Newgreen Glossary">
-    </a>
-    <a href="About.html" class="button">
-      <img src="Design_Assets/NewGreen_Button_About.png" alt="Newgreen About">
-    </a>
-</div>
-    <main>
+    <img src="Design_Assets/logo.png" alt="Newgreen Logo" style="width:75px;height:75px;">
+    <div class="button-container">
+        <a href="Login_Page.html" class="button">
+            <img src="Design_Assets/NewGreen_Button_Calendar.png" alt="Newgreen Calendar">
+        </a>
+        <a href="Calculator.html" class="button">
+            <img src="Design_Assets/NewGreen_Button_Calculator.png" alt="Newgreen Calculator">
+        </a>
+        <a href="Glossary.html" class="button">
+            <img src="Design_Assets/NewGreen_Button_Glossary.png" alt="Newgreen Glossary">
+        </a>
+        <a href="About.html" class="button">
+            <img src="Design_Assets/NewGreen_Button_About.png" alt="Newgreen About">
+        </a>
+    </div>
+ <main>
         <div class="container">
-		<div class="center">
-            		<table>
-				<caption>Budget</caption>
-					<tr>
-						<th>Date</th>
-						<th>Reason</th>
-						<th>Amount</th>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-			</table>
-		</div>
+            <div class="center">
+                <table>
+                    <caption>Budget</caption>
+                    <tr>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Note</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="add-budget-item-form">
+                <h3>Add New Budget Item</h3>
+                <input type="text" id="itemTitle" placeholder="Title">
+                <input type="number" id="itemAmount" placeholder="Amount">
+                <input type="text" id="itemNote" placeholder="Note (Optional)">
+                <button onclick="addBudgetItem()">Add Item</button>
+            </div>
         </div>
-	<button class="addbutton" onclick="entry()">Add Entry</button>
     </main>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchBudgetItems();
+        });
+
+        function fetchBudgetItems() {
+            fetch('http://localhost:8080/userbudgetitems/', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch budget items');
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(item => updateTableWithNewItem(item));
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function updateTableWithNewItem(item) {
+            var table = document.querySelector("table");
+            var row = table.insertRow();
+            var titleCell = row.insertCell(0);
+            var amountCell = row.insertCell(1);
+            var noteCell = row.insertCell(2);
+            titleCell.innerHTML = item.title;
+            amountCell.innerHTML = item.amount;
+            noteCell.innerHTML = item.note;
+        }
+
+        function addBudgetItem() {
+            var title = document.getElementById('itemTitle').value;
+            var amount = document.getElementById('itemAmount').value;
+            var note = document.getElementById('itemNote').value;
+
+            var budgetItem = {
+                title: title,
+                amount: parseFloat(amount),
+                note: note
+            };
+
+            fetch('http://localhost:8080/createbudgetitem/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                body: JSON.stringify(budgetItem)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to add budget item');
+                }
+                return response.json();
+            })
+            .then(data => {
+                updateTableWithNewItem(data);
+                document.getElementById('itemTitle').value = '';
+                document.getElementById('itemAmount').value = '';
+                document.getElementById('itemNote').value = '';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
