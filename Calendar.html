@@ -59,9 +59,9 @@
 	    	bottom: 0;
 	    	left: 50%;
 	    	transform: translateX(-50%);
-	 	background-color: #fff; 
-		padding: 20px; 
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+	 	background-color: #fff;
+		padding: 20px;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 		border: none;
 		border-radius: 12px;
 		text-align: center;
@@ -76,7 +76,7 @@
 		display: block;
 		margin: 0 auto 10px;
 	}
-		
+
 	.add-budget-item-form button {
 		background-color: #4CAF50;
             	border: none;
@@ -115,6 +115,7 @@
                         <th>Note</th>
                     </tr>
                 </table>
+                 <div id="totalAmount">Total Amount: $0</div>
             </div>
             <div class="add-budget-item-form">
                 <h3>Add New Budget Item</h3>
@@ -130,6 +131,15 @@
             fetchBudgetItems();
         });
 
+        function updateTotalAmount() {
+        var total = 0;
+        document.querySelectorAll('table tr:not(:first-child)').forEach(row => {
+            var amount = parseFloat(row.cells[1].innerText || 0);
+            total += amount;
+        });
+        document.getElementById('totalAmount').innerText = 'Total Amount: $' + total.toFixed(2);
+    }
+
         function fetchBudgetItems() {
             fetch('http://localhost:8080/userbudgetitems/', {
                 headers: {
@@ -144,6 +154,7 @@
             })
             .then(data => {
                 data.forEach(item => updateTableWithNewItem(item));
+                updateTotalAmount();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -151,15 +162,41 @@
         }
 
         function updateTableWithNewItem(item) {
-            var table = document.querySelector("table");
-            var row = table.insertRow();
-            var titleCell = row.insertCell(0);
-            var amountCell = row.insertCell(1);
-            var noteCell = row.insertCell(2);
-            titleCell.innerHTML = item.title;
-            amountCell.innerHTML = item.amount;
-            noteCell.innerHTML = item.note;
-        }
+        var table = document.querySelector("table");
+        var row = table.insertRow();
+        row.setAttribute('data-item-id', item.id);
+        var titleCell = row.insertCell(0);
+        var amountCell = row.insertCell(1);
+        var noteCell = row.insertCell(2);
+        var deleteCell = row.insertCell(3);
+        titleCell.innerHTML = item.title;
+        amountCell.innerHTML = item.amount;
+        noteCell.innerHTML = item.note;
+        deleteCell.innerHTML = `<button onclick="deleteBudgetItem(${item.id}, this)">Remove</button>`;
+        updateTotalAmount();
+    }
+
+    function deleteBudgetItem(itemId, buttonElement) {
+        console.log(itemId);
+        fetch(`http://localhost:8080/deletebudgetitem/${itemId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete budget item');
+            }
+            var row = buttonElement.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            updateTotalAmount();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    }
 
         function addBudgetItem() {
             var title = document.getElementById('itemTitle').value;

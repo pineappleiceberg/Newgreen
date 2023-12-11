@@ -151,3 +151,13 @@ def get_budget_items_for_user(db: Session = Depends(get_db), token: str = Depend
 
     budget_items = crud.get_budget_items_for_user(db, user_id=user_id)
     return budget_items
+
+@app.delete('/deletebudgetitem/{item_id}', response_model=schemas.BudgetItem)
+def delete_budget_item(item_id: int, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    user_id = get_user_id_from_token(token)
+    db_item = crud.get_budget_item(db, item_id=item_id)
+    if db_item is None:
+        raise HTTPException(status_code=404, detail="Budget item not found")
+    if db_item.user_id != user_id:
+        raise HTTPException(status_code=403, detail="Not authorized to delete this item")
+    return crud.delete_budget_item(db, item_id=item_id)

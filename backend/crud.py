@@ -37,6 +37,10 @@ def login_user(db: Session, email: str, password: str):
 def get_budget_items(db: Session, skip: int = 0, limit: int = 1000):
     return db.query(models.BudgetEntry).offset(skip).limit(limit).all()
 
+
+def get_budget_item(db: Session, item_id: int):
+    return db.query(models.BudgetEntry).filter(models.BudgetEntry.id == item_id).first()
+
 def get_budget_items_for_user(db: Session, user_id: int):
     budget_items = db.query(models.BudgetEntry).filter(models.BudgetEntry.user_id == user_id).all()
 
@@ -50,4 +54,10 @@ def create_user_budget_item(db: Session, budget_items: schemas.BudgetItem, user_
 
     return db_budget_items
 
-
+def delete_budget_item(db: Session, item_id: int):
+    db_item = db.query(models.BudgetEntry).filter(models.BudgetEntry.id == item_id).first()
+    if db_item:
+        db.delete(db_item)
+        db.commit()
+        return db_item
+    return None
